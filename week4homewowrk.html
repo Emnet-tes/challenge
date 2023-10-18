@@ -136,6 +136,17 @@ let boom=new Date() ;
     let day = days[boom.getDay()];
     let hour = boom.getHours();
         let minutes = boom.getMinutes();
+        if (hour < 10) {
+                hour = "0" + boom.getHours();
+            } else {
+                hour = boom.getHours();
+            }
+            if (minutes < 10) {
+                minutes = "0" + boom.getMinutes();
+            } else {
+                minutes = boom.getMinutes();
+            }
+
     let p=document.querySelector(".time");
     p.innerHTML= `${day} ${hour}:${minutes}`;
 //feature 2
