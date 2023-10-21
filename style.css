@@ -1,0 +1,79 @@
+    .main {
+        width: 590px;
+        height: 250px;
+        display: block;
+        margin: auto;
+        margin-top: 50px;
+        border-color: black;
+        border-width: 1px;
+        border-style: inset;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+    .row {
+        margin-top: 7px;
+    }
+
+    .form-control {
+        width: 350px;
+        margin-left: 20px;
+
+    }
+
+    .move {
+
+        margin-left: 20px;
+    }
+
+    .container {
+        margin-left: 20px;
+    }
+
+    h6 {
+        font-weight: normal;
+    }
+
+    img {
+        vertical-align: middle;
+        border-style: none;
+    }
+
+    .fa {
+        font-size: 40px;
+        font-weight: normal;
+    }
+
+    img {
+        width: 64px;
+        height: 64px;
+        padding-left: 0%;
+    }
+
+    #links {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+
+
+    .align-items-start {
+        font-size: small;
+        margin-left: 0;
+    }
+
+    .parr {
+        position: relative;
+        top: 0%;
+        right: 0%;
+        bottom: 20px;
+        font-size: 15px;
+
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #links {
+        margin-left: 390px;
+    }
