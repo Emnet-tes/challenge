@@ -57,7 +57,33 @@ function display(event) {
         speed.innerHTML = `Wind:${wind} km/h`
     }
     axios.get(`${apiurl}`).then(show);
+    function displayforecast() {
+        let forecast = document.querySelector("#forecast");
+        let forecasthtml = `<div class="row" id="forecast">`;
+        let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
+        days.forEach(function (day) {
+
+            forecasthtml += `
+          <div class="col-2">
+            <div class="forecast-date">
+              ${day}
+            </div>
+            <img
+              src="http://openweathermap.org/img/wn/50d@2x.png" alt="" class="bottomicon"  width="36"  />
+              <div class="temp-range">
+                <span class="max">17°</span>
+            <span class="min">12°</span>
+              </div>
+            </div>
+        `;
+
+        });
+        forecasthtml += `</div>`;
+        forecast.innerHTML = forecasthtml;
+
+    }
 }
+
 city.addEventListener("click", display);
 
 

@@ -1,6 +1,6 @@
     .main {
-        width: 590px;
-        height: 250px;
+        width: 42%;
+        height: 50%;
         display: block;
         margin: auto;
         margin-top: 50px;
@@ -27,40 +27,25 @@
     }
 
     .container {
-        margin-left: 20px;
+        margin-left: 5px;
     }
 
     h6 {
         font-weight: normal;
     }
-
-    img {
-        vertical-align: middle;
-        border-style: none;
-    }
-
     .fa {
         font-size: 40px;
         font-weight: normal;
     }
-
-    img {
-        width: 64px;
-        height: 64px;
-        padding-left: 0%;
-    }
-
     #links {
         margin-left: 100px;
-        margin-right: 100px;
+        margin-left: 390px;
     }
-
 
     .align-items-start {
         font-size: small;
         margin-left: 0;
     }
-
     .parr {
         position: relative;
         top: 0%;
@@ -73,7 +58,20 @@
     a {
         text-decoration: none;
     }
+.forecast-date {
+    font-size: 15px;
+    opacity: 0.6;
+}
 
-    #links {
-        margin-left: 390px;
-    }
+.temp-range {
+    font-size: 12px;
+    padding: 0%;
+}
+
+.min {
+    opacity: 0.6;
+}
+
+.col-2 {
+    width: 79px;
+}
