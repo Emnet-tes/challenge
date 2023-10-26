@@ -13,6 +13,7 @@
 
     .row {
         margin-top: 7px;
+        
     }
 
     .form-control {
@@ -54,10 +55,12 @@
         font-size: 15px;
 
     }
-
-    a {
+a {
         text-decoration: none;
     }
+.weather-forecast {
+            padding-left: 10px;
+        }
 .forecast-date {
     font-size: 15px;
     opacity: 0.6;
