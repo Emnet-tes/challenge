@@ -41,8 +41,7 @@ function display(event) {
         );
         let h1 = document.querySelector(".fa");
         h1.innerHTML = ` ${temp}`;
-
-
+        displayforecast();
         //discription about the temprature
         let report = response.data.weather[0].description;
         let explain = document.querySelector(".report");
