@@ -1,5 +1,5 @@
     .main {
-        width: 42%;
+        width: 510px;
         height: 50%;
         display: block;
         margin: auto;
@@ -9,15 +9,16 @@
         border-style: inset;
         border-radius: 10px;
         background-color: white;
+        position: relative;
+        align-items: center;
     }
 
     .row {
         margin-top: 7px;
-        
     }
 
     .form-control {
-        width: 350px;
+        width: 290px;
         margin-left: 20px;
 
     }
@@ -34,47 +35,61 @@
     h6 {
         font-weight: normal;
     }
+
     .fa {
         font-size: 40px;
         font-weight: normal;
     }
+
+    .float-left {
+        width: 64px;
+        height: 64px;
+        padding-left: 0%;
+    }
+
     #links {
-        margin-left: 100px;
-        margin-left: 390px;
+        align-items: center;
+        margin-right: 100px;
+        margin-left: 400px;
+        justify-content: center;
     }
 
     .align-items-start {
         font-size: small;
         margin-left: 0;
     }
+
     .parr {
         position: relative;
         top: 0%;
         right: 0%;
         bottom: 20px;
         font-size: 15px;
-
     }
-a {
+
+    a {
         text-decoration: none;
     }
-.weather-forecast {
-            padding-left: 10px;
-        }
-.forecast-date {
-    font-size: 15px;
-    opacity: 0.6;
-}
 
-.temp-range {
-    font-size: 12px;
-    padding: 0%;
-}
+    .weather-forecast {
+        padding-left: 10px;
+        margin-top: 20px;
+    }
 
-.min {
-    opacity: 0.6;
-}
+    .forecast-date {
+        font-size: 15px;
+        opacity: 0.6;
+    }
 
-.col-2 {
-    width: 79px;
-}
+    .temp-range {
+        font-size: 12px;
+        padding: 0%;
+    }
+
+    .min {
+        opacity: 0.6;
+    }
+
+    .col-2 {
+        width: 79px;
+    }

@@ -1,6 +1,4 @@
 
-
-//feature 1
 let boom = new Date();
 let days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 let day = days[boom.getDay()];
@@ -27,56 +25,74 @@ function display(event) {
     let cities = document.querySelector("h5");
 
     cities.innerHTML = phew.value;
-    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${phew.value}&appid=${key}&units=metric`
+    let apiurl = `https://api.shecodes.io/weather/v1/current?query=${phew.value}&key=${key}&inits=metric`;
 
     function show(response) {
+        function getforecast(coorinates) {
+            api = `https://api.shecodes.io/weather/v1/forecast?lon=${coorinates.longitude}&lat=${coorinates.latitude}&key=${key}&units=metric`;
+            console.log(coorinates.latitude);
+            axios.get(api).then(displayforecast);
+        }
         //temprature of the country
-        let temp = Math.round(response.data.main.temp);
-        console.log(response.data);
-        console.log(`${response.data.main.temp}`);
+        let temp = Math.round(response.data.temperature.current);
+        console.log(response.data.coordinates);
+        console.log(temp);
         let iconElement = document.querySelector("#icon");
-        let image = response.data.weather[0].icon;
-        iconElement.setAttribute("src",
-            `http://openweathermap.org/img/wn/${image}@2x.png`
-        );
+        let image = response.data.condition.icon;
+        iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${image}.png`);
         let h1 = document.querySelector(".fa");
         h1.innerHTML = ` ${temp}`;
-        displayforecast();
+
+        getforecast(response.data.coordinates);
+
         //discription about the temprature
-        let report = response.data.weather[0].description;
+        let report = response.data.condition.description;
         let explain = document.querySelector(".report");
         explain.innerHTML = `${report}`;
         //humidity of the country
-        let humi = response.data.main.humidity;
+        let humi = response.data.temperature.humidity;
         let humidity = document.querySelector(".hum");
-        humidity.innerHTML = `Humidity:${humi}%`;
+        humidity.innerHTML = `Humidity: ${humi}%`;
         //wind speed of the country
         let wind = Math.round(response.data.wind.speed);
         let speed = document.querySelector(".wind");
-        speed.innerHTML = `Wind:${wind} km/h`
+        speed.innerHTML = `Wind: ${wind} km/h`
     }
     axios.get(`${apiurl}`).then(show);
-    function displayforecast() {
+
+    function dayformat(timestamp) {
+        let date = new Date(timestamp * 1000);
+        let day = date.getDay();
+        let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        return days[day];
+    }
+
+    //daily forecast    
+    function displayforecast(response) {
+
+        let forecastday = response.data.daily;
+        console.log(forecastday);
         let forecast = document.querySelector("#forecast");
         let forecasthtml = `<div class="row" id="forecast">`;
-        let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
-        days.forEach(function (day) {
-
-            forecasthtml += `
+        forecastday.forEach(function (daily, index) {
+            if (index < 6) {
+                forecasthtml += `
           <div class="col-2">
             <div class="forecast-date">
-              ${day}
+              ${dayformat(daily.time)}
             </div>
             <img
-              src="http://openweathermap.org/img/wn/50d@2x.png" alt="" class="bottomicon"  width="36"  />
+              src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${daily.condition
+                        .icon}.png" alt="" class="bottomicon"  width="36"  />
               <div class="temp-range">
-                <span class="max">17°</span>
-            <span class="min">12°</span>
+                <span class="max">${Math.round(daily.temperature.maximum)}°</span>
+            <span class="min">${Math.round(daily.temperature.minimum)}°</span>
               </div>
             </div>
         `;
-
-        });
+            }
+        }
+        )
         forecasthtml += `</div>`;
         forecast.innerHTML = forecasthtml;
 
@@ -84,9 +100,8 @@ function display(event) {
 }
 
 city.addEventListener("click", display);
+let key = "a4a4df436f63o622062tf5b03c2acdbf";
 
-
-let key = "82105329264a81552281d1bba61e049b";
 
 //current location
 let current = document.querySelector(".btn-success");
