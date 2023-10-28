@@ -30,13 +30,10 @@ function display(event) {
     function show(response) {
         function getforecast(coorinates) {
             api = `https://api.shecodes.io/weather/v1/forecast?lon=${coorinates.longitude}&lat=${coorinates.latitude}&key=${key}&units=metric`;
-            console.log(coorinates.latitude);
             axios.get(api).then(displayforecast);
         }
         //temprature of the country
         let temp = Math.round(response.data.temperature.current);
-        console.log(response.data.coordinates);
-        console.log(temp);
         let iconElement = document.querySelector("#icon");
         let image = response.data.condition.icon;
         iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${image}.png`);
@@ -49,10 +46,12 @@ function display(event) {
         let report = response.data.condition.description;
         let explain = document.querySelector(".report");
         explain.innerHTML = `${report}`;
+       
         //humidity of the country
         let humi = response.data.temperature.humidity;
         let humidity = document.querySelector(".hum");
         humidity.innerHTML = `Humidity: ${humi}%`;
+       
         //wind speed of the country
         let wind = Math.round(response.data.wind.speed);
         let speed = document.querySelector(".wind");
@@ -71,7 +70,6 @@ function display(event) {
     function displayforecast(response) {
 
         let forecastday = response.data.daily;
-        console.log(forecastday);
         let forecast = document.querySelector("#forecast");
         let forecasthtml = `<div class="row" id="forecast">`;
         forecastday.forEach(function (daily, index) {
@@ -113,22 +111,3 @@ function showcurrent(event) {
     navigator.geolocation.getCurrentPosition(getcurrent);
 }
 current.addEventListener("click", showcurrent);
-//fharinite converter
-let fharanite = document.querySelector(".far-link");
-function fharaniteconverter(event) {
-    event.preventDefault();
-    let temp = document.querySelector(".fa").textContent;
-    let tempp = ((parseFloat(temp) * 9 / 5) + 32);
-    console.log(tempp);
-    document.querySelector(".fa").textContent = tempp;
-
-}
-fharanite.addEventListener("click", fharaniteconverter);
-//celcius convertetr
-let celcius = document.querySelector(".cel-link");
-function celciusconverter() {
-    let temp = document.querySelector(".fa").textContent;
-    let tempp = ((parseFloat(temp) - 32) * 5 / 9);
-    document.querySelector(".fa").textContent = tempp;
-}
-celcius.addEventListener("click", celciusconverter);
