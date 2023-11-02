@@ -1,6 +1,6 @@
-
+//feature 1
 let boom = new Date();
-let days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let day = days[boom.getDay()];
 let hour = boom.getHours();
 let minutes = boom.getMinutes();
@@ -17,6 +17,37 @@ if (minutes < 10) {
 let p = document.querySelector(".time");
 p.innerHTML = `Last updated :${day} ${hour}:${minutes}`;
 
+
+
+//temprature of the country
+function temperature(response) {
+    let temp = Math.round(response.data.temperature.current);
+    console.log(response.data);
+    console.log(temp);
+    let iconElement = document.querySelector("#icon");
+    let image = response.data.condition.icon;
+    iconElement.setAttribute("src",
+        `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${image}.png`
+    );
+    let h1 = document.querySelector(".fa");
+    h1.innerHTML = ` ${temp}`;
+}
+//additional info about weather
+function additional(response) {
+    //discription about the temprature
+    let report = response.data.condition.description;
+    let explain = document.querySelector(".report");
+    explain.innerHTML = `${report}`;
+    //humidity of the country
+    let humi = response.data.temperature.humidity;
+    let humidity = document.querySelector(".hum");
+    humidity.innerHTML = `Humidity:${humi}%`;
+    //wind speed of the country
+    let wind = Math.round(response.data.wind.speed);
+    let speed = document.querySelector(".wind");
+    speed.innerHTML = `Wind:${wind} km/h`;
+}
+//searched city
 let city = document.querySelector(".mb-3");
 function display(event) {
     event.preventDefault();
@@ -32,30 +63,10 @@ function display(event) {
             api = `https://api.shecodes.io/weather/v1/forecast?lon=${coorinates.longitude}&lat=${coorinates.latitude}&key=${key}&units=metric`;
             axios.get(api).then(displayforecast);
         }
-        //temprature of the country
-        let temp = Math.round(response.data.temperature.current);
-        let iconElement = document.querySelector("#icon");
-        let image = response.data.condition.icon;
-        iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${image}.png`);
-        let h1 = document.querySelector(".fa");
-        h1.innerHTML = ` ${temp}`;
 
+        temperature(response);
         getforecast(response.data.coordinates);
-
-        //discription about the temprature
-        let report = response.data.condition.description;
-        let explain = document.querySelector(".report");
-        explain.innerHTML = `${report}`;
-       
-        //humidity of the country
-        let humi = response.data.temperature.humidity;
-        let humidity = document.querySelector(".hum");
-        humidity.innerHTML = `Humidity: ${humi}%`;
-       
-        //wind speed of the country
-        let wind = Math.round(response.data.wind.speed);
-        let speed = document.querySelector(".wind");
-        speed.innerHTML = `Wind: ${wind} km/h`
+        additional(response);
     }
     axios.get(`${apiurl}`).then(show);
 
@@ -111,3 +122,4 @@ function showcurrent(event) {
     navigator.geolocation.getCurrentPosition(getcurrent);
 }
 current.addEventListener("click", showcurrent);
+
